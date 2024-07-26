@@ -1,0 +1,73 @@
+<form>
+            <div class="form-group">
+                <!-- in team.component.html, update the template by adding a text input with the id set to team, type set to text -->
+                <label for="team">Team</label>
+                <!-- The formsModule has a directive called ngModel that binds the value of the input property to a property class -->
+                 <!-- Here we bind the input value to use the [ngModel] directive for this syntax [(ngModel)]="team" -->
+                <input type="text" id="team" [(ngModel)]="team" [ngModelOptions]="{ standalone: true}"> <!--ngModelOptions is used to pass
+                 configuration option to the ngModel directive-->
+    
+            </div>
+    
+            <div class="form-group">
+                <label for="task">Task</label>
+                <input type="text" id="task" [(ngModel)]="task" [ngModelOptions]="{ standalone: true}">
+                
+            </div>
+            <div class = "form-group">
+                <label>Comments</label>
+           <!-- Bind the comments input to the comments property using ngModel -->
+                <textarea id="comments" [(ngModel)]="comments" [ngModelOptions]="{standalone:true}"></textarea>
+            </div>
+             <div>
+                <label for="status">Status</label>
+        <select [(ngModel)]="selectedValue" [ngModelOptions]="{standalone: true}">
+            <option *ngFor="let s of status" [ngValue]="s">{{s.name}}</option><!--iterates over the status array in the component class 
+            and creates an option element for each item in the array.-->
+        </select>
+          </div>
+            <button type="button" (click)="onClickSubmit()">
+                Submit
+            </button>  
+</form>
+<div class="form-group">
+    <label for="search">Search</label>
+    <div class="search-container">
+      <input type="text" id="search" [(ngModel)]="searchTerm" [ngModelOptions]="{ standalone: true }">
+      <button type="button" (click)="onSearch()">
+        <i class="fas fa-search"></i>
+      </button>
+    </div>
+<table class="table table-bordered ">
+    <thead>
+        <tr>
+            <th>Team</th>
+            <th>Task</th>
+            <th>Status</th>
+            <th>Comments</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let t of filteredData">
+            <!-- Show the Value of the input field in a table -->
+            <td>
+                <!-- To display the input value in a template we used the interpolation syntax{{}} -->
+                {{t.team}} 
+            </td>
+            <td>
+                {{t.task}}
+            </td>
+           
+            <td>
+                {{t.selectedValue.name}}
+            </td>
+            <td>
+                {{t.comments}}
+            </td>
+         
+        </tr>
+        
+
+    </tbody>
+</table>
